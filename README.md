@@ -1,0 +1,2 @@
+# Rik
+Talep-Üretilen-Satış
