@@ -1,0 +1,55 @@
+[
+  {
+    "id": "st-001",
+    "name": "Ankara Merkez Şarj",
+    "city": "Ankara",
+    "operator": "VoltUp",
+    "address": "Atatürk Bulvarı No:1",
+    "connectors": [
+      { "type": "AC", "powerKW": 22 },
+      { "type": "DC", "powerKW": 50 }
+    ]
+  },
+  {
+    "id": "st-002",
+    "name": "İstanbul Anadolu AVM",
+    "city": "İstanbul",
+    "operator": "PluggedIn",
+    "address": "Kadıköy Rıhtım Caddesi",
+    "connectors": [
+      { "type": "AC", "powerKW": 11 }
+    ]
+  },
+  {
+    "id": "st-003",
+    "name": "İzmir Konak Meydanı",
+    "city": "İzmir",
+    "operator": "EgeCharge",
+    "address": "Konak Meydanı",
+    "connectors": [
+      { "type": "DC", "powerKW": 60 }
+    ]
+  },
+  {
+    "id": "st-004",
+    "name": "Bursa Nilüfer Ofis",
+    "city": "Bursa",
+    "operator": "GreenWatt",
+    "address": "Organize Sanayi Bölgesi",
+    "connectors": [
+      { "type": "AC", "powerKW": 7 },
+      { "type": "AC", "powerKW": 22 }
+    ]
+  },
+  {
+    "id": "st-005",
+    "name": "Antalya Havalimanı",
+    "city": "Antalya",
+    "operator": "SunCharge",
+    "address": "Havalimanı İç Hatlar",
+    "connectors": [
+      { "type": "DC", "powerKW": 120 },
+      { "type": "AC", "powerKW": 22 }
+    ]
+  }
+]
