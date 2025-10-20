@@ -1,0 +1,14 @@
+.filter-panel {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.filter-panel input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #2563eb;
+}
+
+.filter-panel input[type='number'] {
+  font-size: 0.95rem;
+}
