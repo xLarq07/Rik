@@ -1,0 +1,63 @@
+// Prisma schema defining user, profile, and transaction data models.
+// Sensitive PCI/KVKK fields are annotated with notes for encryption or secure vault usage.
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int           @id @default(autoincrement())
+  email     String        @unique
+  /// KVKK: Store the hashed password only; hash with strong algorithm before persisting.
+  password  String
+  /// KVKK: Store phone numbers using column-level encryption or an external vault.
+  phone     String?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  profile   Profile?
+  transactions Transaction[]
+}
+
+model Profile {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     Int      @unique
+  firstName  String
+  lastName   String
+  /// KVKK: National identity numbers must reside in a secure vault or encrypted column.
+  nationalId String?
+  birthDate  DateTime?
+  address    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Transaction {
+  id          Int                 @id @default(autoincrement())
+  user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int
+  reference   String              @unique
+  amount      Decimal             @db.Decimal(12, 2)
+  currency    String              @default("TRY")
+  /// PCI: Card PAN hashes must be stored via column-level encryption or sent to a secure vault.
+  cardPanHash String?
+  /// PCI: Card expiry values must be vaulted or encrypted at rest.
+  cardExpiry  String?
+  metadata    Json?
+  status      TransactionStatus   @default(PENDING)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@index([userId])
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
